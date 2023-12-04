@@ -1,0 +1,23 @@
+<h3 class="card-title mb-3">
+  Step 3. Action "Click a button"
+</h3>
+<p *ngIf="!isChosen && !isDone">Choose a button</p>
+<div *ngIf="isChosen && !isDone">
+  <p>Great! Now you can run bot</p>
+  <div>
+    <button class="btn btn-secondary" type="button" (click)="reset()">
+      Reset
+    </button>
+    <button class="btn btn-primary ms-2" type="button" (click)="runBot()">
+      Run bot
+    </button>
+  </div>
+</div>
+<div *ngIf="isDone">
+  <p>Amazing! Bot has completed its work</p>
+  <div>
+    <button class="btn btn-primary" type="button" (click)="onResetApp.emit()">
+      Start from beginning
+    </button>
+  </div>
+</div>

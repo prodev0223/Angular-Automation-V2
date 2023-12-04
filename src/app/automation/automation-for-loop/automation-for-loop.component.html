@@ -1,0 +1,33 @@
+<h3 class="card-title mb-3">Step 1. For Loop</h3>
+
+<div *ngIf="!clickedElements.length">
+  <p>Select at least 2 elements</p>
+</div>
+
+<div *ngIf="clickedElements.length === 1">
+  <p>Great! Select one more element</p>
+
+  <div class="d-flex">
+    <button class="btn btn-secondary" (click)="reset()">
+      <i class="fa fa-ban"></i> Reset
+    </button>
+  </div>
+</div>
+
+<div *ngIf="clickedElements.length > 1">
+  <p>
+    Amazing! You've got {{ highlightedElements.length }} elements ({{
+      highlightedElements.length - clickedElements.length
+    }}
+    predicted) in total, is that what you want?
+  </p>
+
+  <div class="d-flex">
+    <button class="btn btn-secondary" (click)="reset()">
+      <i class="fa fa-ban"></i> Reset
+    </button>
+    <button class="btn btn-primary ms-2" (click)="save()">
+      <i class="fa fa-check"></i> Yes, save
+    </button>
+  </div>
+</div>

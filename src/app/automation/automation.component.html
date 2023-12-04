@@ -1,0 +1,59 @@
+<div class="automation">
+  <div *ngIf="overlayIsVisible" class="automation-overlay"></div>
+  <section class="card shadow-lg automation-panel">
+    <div class="card-body">
+      <ul class="nav nav-pills mb-4">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [ngClass]="{ active: step === 1 }"
+            aria-current="page"
+            href="#"
+            (click)="goToStep($event, 1)"
+            >Step 1. For loop</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [ngClass]="{ active: step === 2, disabled: step <= 2 }"
+            href="#"
+            (click)="goToStep($event, 2)"
+            >Step 2. Choose an action</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [ngClass]="{ active: step === 3, disabled: step <= 3 }"
+            href="#"
+            (click)="goToStep($event, 3)"
+            >Step 3. Run action</a
+          >
+        </li>
+      </ul>
+
+      <automation-for-loop
+        *ngIf="step == 1"
+        (onSaveItems)="onSaveItems($event)"
+      ></automation-for-loop>
+
+      <automation-actions
+        *ngIf="step == 2"
+        (onChooseAnAction)="onChooseAnAction($event)"
+      ></automation-actions>
+
+      <automation-actions-button
+        *ngIf="step == 3 && action === 'button'"
+        [elementsList]="items"
+        (onReset)="onReset()"
+      ></automation-actions-button>
+
+      <automation-actions-input
+        *ngIf="step == 3 && action === 'input'"
+        [elementsList]="items"
+        (onReset)="onReset()"
+      ></automation-actions-input>
+    </div>
+  </section>
+</div>

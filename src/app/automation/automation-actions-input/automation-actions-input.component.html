@@ -1,0 +1,32 @@
+<h3 class="card-title mb-3">
+  Step 3. Action "Input text"
+</h3>
+<p *ngIf="!isChosen && !isDone">Select input elements</p>
+<div *ngIf="isChosen && !isDone">
+  <p>Enter some text</p>
+  <div class="mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter text"
+      [(ngModel)]="text"
+    />
+  </div>
+
+  <div>
+    <button class="btn btn-secondary" type="button" (click)="reset()">
+      Reset
+    </button>
+    <button class="btn btn-primary ms-2" type="button" (click)="runBot()">
+      Run bot
+    </button>
+  </div>
+</div>
+<div *ngIf="isDone">
+  <p>Amazing! Bot has completed its work</p>
+  <div>
+    <button class="btn btn-primary" type="button" (click)="onResetApp.emit()">
+      Start from beginning
+    </button>
+  </div>
+</div>

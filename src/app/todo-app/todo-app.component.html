@@ -1,0 +1,96 @@
+<section class="card shadow-lg todo-app">
+  <div class="card-body">
+    <h1 class="card-title h4 mb-3">Your tasks</h1>
+    <form>
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Take the garbage out"
+          value="New task 1"
+        />
+        <button
+          class="btn btn-outline-primary"
+          (click)="addTask('New task 1')"
+          type="button"
+        >
+          <i class="fas fa-plus"></i> Add
+        </button>
+      </div>
+    </form>
+    <form>
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Take the garbage out"
+          value="New task 2"
+        />
+        <button
+          class="btn btn-outline-primary"
+          (click)="addTask('New task 2')"
+          type="button"
+        >
+          <i class="fas fa-plus"></i> Add
+        </button>
+      </div>
+    </form>
+    <form>
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Take the garbage out"
+          value="New task 3"
+        />
+        <button
+          class="btn btn-outline-primary"
+          (click)="addTask('New task 3')"
+          type="button"
+        >
+          <i class="fas fa-plus"></i> Add
+        </button>
+      </div>
+    </form>
+    <div v-if="pending.length > 0">
+      <p>
+        You have {{ tasks.length }} task<span *ngIf="tasks.length != 1">s</span>
+      </p>
+      <ul class="list-group">
+        <li
+          class="list-group-item d-flex"
+          *ngFor="let task of tasks"
+          [class.cool]="task.completed"
+        >
+          <input
+            class="form-check-input me-1"
+            [checked]="task.completed"
+            type="checkbox"
+            [name]="task.title"
+            (change)="task.completed = !task.completed"
+          />
+          <label class="form-check-label" [for]="task.title"></label>
+          <span
+            class="ms-1"
+            [ngClass]="{ 'text-decoration-line-through': task.completed }"
+            (click)="task.completed = !task.completed"
+            >{{ task.title }}</span
+          >
+          <a
+            class="text-danger ms-auto"
+            href="#"
+            (click)="$event.preventDefault(); deleteTask(task)"
+          >
+            <i class="fa fa-times"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <p *ngIf="tasks.length == 0" class="todo-app-free" v-if="!pending.length">
+      <img
+        src="https://nourabusoud.github.io/vue-todo-list/images/beer_celebration.svg"
+        alt="celebration"
+      />Time to chill! You have no todos.
+    </p>
+  </div>
+</section>

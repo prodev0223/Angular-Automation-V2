@@ -1,0 +1,72 @@
+.automation {
+  //# Elements
+  &-panel {
+    position: fixed;
+    left: 300px;
+    right: 300px;
+    bottom: 0;
+    height: 350px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    z-index: 200;
+  }
+
+  &-overlay {
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    backdrop-filter: blur(10px);
+    z-index: 100;
+  }
+
+  &-action {
+    width: 200px;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      border-color: var(--bs-primary-border-subtle);
+      border-radius: 5px;
+    }
+  }
+
+  &-block {
+    &-highlighted {
+      outline: dashed 2px var(--bs-primary-border-subtle) !important;
+      outline-offset: 3px;
+      cursor: pointer;
+    }
+
+    &-clicked {
+      outline: solid 2px var(--bs-success-border-subtle) !important;
+      outline-offset: 3px;
+      cursor: pointer;
+    }
+  }
+
+  &-element {
+    &-highlighted {
+      outline: dashed 2px var(--bs-primary-border-subtle) !important;
+      outline-offset: 3px;
+      cursor: pointer;
+    }
+
+    &-clicked {
+      outline: solid 2px var(--bs-success-border-subtle) !important;
+      outline-offset: 3px;
+      cursor: pointer;
+    }
+  }
+
+  //# Modifiers
+  // Has Overlay Modifier
+  &-has-overlay {
+    .automation-block-clicked {
+      position: relative !important;
+      z-index: 200 !important;
+    }
+  }
+}

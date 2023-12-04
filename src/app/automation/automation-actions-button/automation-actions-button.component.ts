@@ -8,6 +8,8 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { AutomationService } from '../automation.service';
+import * as rxjs from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'automation-actions-button',
@@ -23,8 +25,19 @@ export class AutomationActionsButtonComponent
   isDone = false;
   highlightedClassName: string = 'automation-element-highlighted';
   clickedClassName: string = 'automation-element-clicked';
+  onClickSubscription: Subscription = new Subscription();
 
   constructor(private automationService: AutomationService) {}
+
+  private addEventListeners() {
+    document.addEventListener('mouseover', this.mouseOverListener);
+    document.addEventListener('click', this.clickListener, true);
+  }
+
+  private removeEventListeners() {
+    document.removeEventListener('mouseover', this.mouseOverListener);
+    document.removeEventListener('click', this.clickListener, true);
+  }
 
   private mouseOverListener = (event: MouseEvent) => {
     let element = event.target as HTMLElement;
@@ -62,8 +75,7 @@ export class AutomationActionsButtonComponent
       this.highlightedElements,
       this.clickedClassName
     );
-    document.removeEventListener('mouseover', this.mouseOverListener);
-    document.removeEventListener('click', this.clickListener, true);
+    this.removeEventListeners();
   };
 
   ngOnInit() {
@@ -71,8 +83,7 @@ export class AutomationActionsButtonComponent
   }
 
   ngAfterViewInit() {
-    document.addEventListener('mouseover', this.mouseOverListener);
-    document.addEventListener('click', this.clickListener, true);
+    this.addEventListeners();
   }
 
   runBot() {
@@ -92,8 +103,7 @@ export class AutomationActionsButtonComponent
       this.clickedClassName
     );
     this.highlightedElements = [];
-    document.addEventListener('mouseover', this.mouseOverListener);
-    document.addEventListener('click', this.clickListener, true);
+    this.addEventListeners();
   }
 
   ngOnDestroy() {
@@ -102,7 +112,6 @@ export class AutomationActionsButtonComponent
       this.highlightedClassName,
       this.clickedClassName
     );
-    document.removeEventListener('mouseover', this.mouseOverListener);
-    document.removeEventListener('click', this.clickListener, true);
+    this.removeEventListeners();
   }
 }

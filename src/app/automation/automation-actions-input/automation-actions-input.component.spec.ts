@@ -1,16 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+// import { AutomationModule } from '../automation.module';
 
-import { AutomationActionsButtonComponent } from './automation-actions-button.component';
+import { AutomationActionsInputComponent } from './automation-actions-input.component';
 
-describe('AutomationActionsButtonComponent', () => {
-  let component: AutomationActionsButtonComponent;
-  let fixture: ComponentFixture<AutomationActionsButtonComponent>;
+describe('AutomationActionsInputComponent', () => {
+  let component: AutomationActionsInputComponent;
+  let fixture: ComponentFixture<AutomationActionsInputComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AutomationActionsButtonComponent]
+      declarations: [AutomationActionsInputComponent],
     });
-    fixture = TestBed.createComponent(AutomationActionsButtonComponent);
+    fixture = TestBed.createComponent(AutomationActionsInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

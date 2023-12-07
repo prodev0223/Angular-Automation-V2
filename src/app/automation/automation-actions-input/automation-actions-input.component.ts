@@ -50,7 +50,6 @@ export class AutomationActionsInputComponent
       'input',
       this.elementsList
     );
-    console.log(this.highlightedElements);
 
     this.automationService.removeClassNameFromList(
       this.highlightedElements,
@@ -86,10 +85,6 @@ export class AutomationActionsInputComponent
     this.removeEventListeners();
   };
 
-  ngOnInit() {
-    this.automationService.showOverlay();
-  }
-
   ngAfterViewInit() {
     this.addEventListeners();
   }
@@ -99,7 +94,6 @@ export class AutomationActionsInputComponent
       (this.highlightedElements[i] as HTMLInputElement).value = this.text;
     }
     this.isDone = true;
-    this.automationService.hideOverlay();
   }
 
   reset() {

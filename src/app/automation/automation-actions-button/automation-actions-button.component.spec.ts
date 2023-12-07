@@ -15,8 +15,6 @@ describe('AutomationActionsButtonComponent', () => {
       'AutomationService',
       {
         getListOfElementsByTagAndClasses: [],
-        showOverlay: undefined,
-        hideOverlay: undefined,
         resetAction: undefined,
         removeClassNameFromList: undefined,
         addClassNameToList: undefined,
@@ -33,11 +31,6 @@ describe('AutomationActionsButtonComponent', () => {
     fixture = TestBed.createComponent(AutomationActionsButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
-
-  it('should show overlay', async () => {
-    component.ngOnInit();
-    expect(mockAutomationService.showOverlay).toHaveBeenCalled();
   });
 
   it('should calculate list of buttons if mouseover triggered inside chosen block', async () => {

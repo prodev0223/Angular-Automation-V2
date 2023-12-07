@@ -14,27 +14,16 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./automation.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AutomationComponent implements OnDestroy, AfterContentChecked {
+export class AutomationComponent implements AfterContentChecked {
   items: HTMLElement[] = [];
   step: number = 1;
   action: string = '';
   overlayIsVisible: boolean = false;
-  overlaySubscription: BehaviorSubject<boolean>;
 
   constructor(
     private automationService: AutomationService,
     private changeDetector: ChangeDetectorRef
-  ) {
-    this.overlaySubscription = this.automationService.getOverlay();
-    this.overlaySubscription.subscribe((value) => {
-      this.overlayIsVisible = value;
-      if (value) {
-        document.body.classList.add('automation-has-overlay');
-      } else {
-        document.body.classList.remove('automation-has-overlay');
-      }
-    });
-  }
+  ) {}
 
   goToStep = ($event: Event, step: number) => {
     $event.preventDefault();
@@ -73,8 +62,4 @@ export class AutomationComponent implements OnDestroy, AfterContentChecked {
   ngAfterContentChecked(): void {
     this.changeDetector.detectChanges();
   }
-
-  ngOnDestroy = () => {
-    this.overlaySubscription.unsubscribe();
-  };
 }

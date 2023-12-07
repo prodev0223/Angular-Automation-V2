@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   AfterViewInit,
   OnDestroy,
   Input,
@@ -8,7 +7,6 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { AutomationService } from '../automation.service';
-import * as rxjs from 'rxjs';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -16,7 +14,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './automation-actions-button.component.html',
 })
 export class AutomationActionsButtonComponent
-  implements OnInit, AfterViewInit, OnDestroy {
+  implements AfterViewInit, OnDestroy {
   @Output('onReset') onResetApp = new EventEmitter();
   @Input() elementsList: HTMLElement[] = [];
 
@@ -78,10 +76,6 @@ export class AutomationActionsButtonComponent
     this.removeEventListeners();
   };
 
-  ngOnInit() {
-    this.automationService.showOverlay();
-  }
-
   ngAfterViewInit() {
     this.addEventListeners();
   }
@@ -91,7 +85,6 @@ export class AutomationActionsButtonComponent
       this.highlightedElements[i].click();
     }
     this.isDone = true;
-    this.automationService.hideOverlay();
   }
 
   reset() {

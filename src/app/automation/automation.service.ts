@@ -9,14 +9,6 @@ export class AutomationService {
 
   constructor() {}
 
-  showOverlay() {
-    this.overlaySubject.next(true);
-  }
-
-  hideOverlay() {
-    this.overlaySubject.next(false);
-  }
-
   getOverlay() {
     return this.overlaySubject;
   }
@@ -156,7 +148,6 @@ export class AutomationService {
   ) {
     this.removeClassNameFromList(list, classNameHighlighted);
     this.removeClassNameFromList(list, classNameClicked);
-    this.hideOverlay();
   }
 
   addClassNameToList = (list: HTMLElement[], className: string) => {

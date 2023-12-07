@@ -66,17 +66,17 @@ export class AutomationService {
     return result;
   };
 
-  private getListOfElementsFromUL = (
+  private getListOfElementsFromULOrTable = (
     list: HTMLCollection,
     className: string
   ) => {
     let result: HTMLElement[] = [];
 
     for (let i = 0; i < list.length; i++) {
-      if (className && list[i].classList.contains(className)) {
+      if (list[i].querySelector(`.${className}`)) {
         result.push(list[i] as HTMLElement);
-      } else if (list[i].querySelector(`.${className}`)) {
-        result.push(list[i].querySelector(`.${className}`) as HTMLElement);
+      } else if (className && list[i].classList.contains(className)) {
+        result.push(list[i] as HTMLElement);
       }
     }
 
@@ -103,17 +103,13 @@ export class AutomationService {
           children[i].tagName === tagName &&
           children[i].querySelector(`.${childClassName}`)
         ) {
-          result.push(
-            children[i].querySelector(`.${childClassName}`) as HTMLElement
-          );
+          result.push(children[i] as HTMLElement);
         }
       } else if (
         children[i].tagName === tagName &&
         children[i].querySelector(`.${childClassName}`)
       ) {
-        result.push(
-          children[i].querySelector(`.${childClassName}`) as HTMLElement
-        );
+        result.push(children[i] as HTMLElement);
       }
     }
 
@@ -129,13 +125,17 @@ export class AutomationService {
     let i = 0;
     let posssibleList: HTMLElement[];
 
+    let closest =
+      hoveredElement.closest('ul') || hoveredElement.closest('tbody');
+    if (closest) {
+      return this.getListOfElementsFromULOrTable(
+        closest.children,
+        hoveredElement.classList[0]
+      );
+    }
+
     while (i < parentNestings) {
-      if (parent && parent.tagName === 'UL') {
-        return this.getListOfElementsFromUL(
-          parent.children,
-          hoveredElement.classList[0]
-        );
-      } else if (parent) {
+      if (parent) {
         posssibleList = this.getPossibleList(
           parent,
           hoveredElement.classList[0],

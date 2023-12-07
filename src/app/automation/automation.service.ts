@@ -66,18 +66,11 @@ export class AutomationService {
     return result;
   };
 
-  private getListOfElementsFromULOrTable = (
-    list: HTMLCollection,
-    className: string
-  ) => {
+  private getListOfElementsFromULOrTable = (list: HTMLCollection) => {
     let result: HTMLElement[] = [];
 
     for (let i = 0; i < list.length; i++) {
-      if (list[i].querySelector(`.${className}`)) {
-        result.push(list[i] as HTMLElement);
-      } else if (className && list[i].classList.contains(className)) {
-        result.push(list[i] as HTMLElement);
-      }
+      result.push(list[i] as HTMLElement);
     }
 
     return result;
@@ -127,11 +120,9 @@ export class AutomationService {
 
     let closest =
       hoveredElement.closest('ul') || hoveredElement.closest('tbody');
+
     if (closest) {
-      return this.getListOfElementsFromULOrTable(
-        closest.children,
-        hoveredElement.classList[0]
-      );
+      return this.getListOfElementsFromULOrTable(closest.children);
     }
 
     while (i < parentNestings) {
